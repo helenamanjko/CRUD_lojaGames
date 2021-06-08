@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.generation.minhaLojaDeGames.model.Categoria;
+import org.generation.minhaLojaDeGames.model.Produto;
 import org.generation.minhaLojaDeGames.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,9 +30,11 @@ public class CategoriaController {
 	@GetMapping ResponseEntity<List<Categoria>> getAll(){
 		return ResponseEntity.ok(repository.findAll());
 	}
-	@GetMapping("{/id}")
-	public ResponseEntity<Categoria> getById(@PathVariable long id){
-		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Categoria> GetById(@PathVariable long id){
+		return repository.findById(id)
+				.map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	@GetMapping("/genero/{genero}")
